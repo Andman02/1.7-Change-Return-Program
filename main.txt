@@ -1,0 +1,59 @@
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class ChangeReturn
+{
+	public static void main(String args[])
+	{
+		Scanner inputScan = new Scanner(System.in);
+		DecimalFormat moneyFormat = new DecimalFormat("$###.##");
+		
+		double cost, moneyGiven, change, temp;
+		int quarters, dimes, nickels, pennies;
+		
+		// prompt user for cost and amount given
+		System.out.print("Enter in the cost: ");
+		cost = inputScan.nextDouble();
+		System.out.print("Enter in the amount given: ");
+		moneyGiven = inputScan.nextDouble();
+		
+		change = moneyGiven - cost;
+		
+		if (change > 0) // if there is change to give
+		{
+			System.out.println("Your change is: " + moneyFormat.format(change));
+			
+			change = change * 100;
+			temp = change / 25;
+			quarters = (int) temp;
+			change = change % 25;
+			temp = change / 10;
+			dimes = (int) temp;
+			change = change % 10;
+			temp = change / 5;
+			nickels = (int) temp;
+			change = change % 5;
+			temp = change / 1;
+			pennies = (int) temp;
+			
+			System.out.println(quarters + " Quarters");
+			System.out.println(dimes + " Dimes");
+			System.out.println(nickels + " Nickels");
+			System.out.println(pennies + " Pennies");
+			
+		}
+		
+		else if (change == 0) // if user paid the correct amount
+		{
+			System.out.println("You paid the full amount! Have a nice day! :D");
+		}
+		
+		else // if the user did not pay enough money
+		{
+			change = -change;
+			System.out.println("You still owe " + moneyFormat.format(change));
+		}
+		inputScan.close();
+		
+	}
+}
